@@ -1,4 +1,5 @@
 /env
+env/
 .env
 *.pyc
 cms/__pycache__/
@@ -10,3 +11,4 @@ djangobackend/example.env
 .history
 .idea
 /.idea
+todo.md
