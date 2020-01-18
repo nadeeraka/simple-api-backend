@@ -1,1 +1,10 @@
 /venv
+.venv
+*.pyc
+cms/__pycache__/
+cms/__migrations__/__pycache__
+cms/migrations/__pycache__/__init__.cpython-37.pyc
+cms/migrations/__pycache__/0001_initial.cpython-37.pyc
+cms/migrations/__pycache__/0002_auto_20191208_1118.cpython-37.pyc
+djangobackend/example.env
+.history
