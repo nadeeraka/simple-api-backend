@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import JSONField, ArrayField
 
 
 # Create your models here.
@@ -7,7 +8,7 @@ class Customer(models.Model):
     code = models.CharField(max_length=100, unique=True)
     name = models.CharField(max_length=100, unique=True)
     email = models.CharField(max_length=100, unique=True)
-    details = models.JSONField(default=dict)
+    details = JSONField(default=dict)
     ex_points = models.DecimalField(max_digits=100, decimal_places=3, default=0)
 
     class Meta:
@@ -29,7 +30,7 @@ class Products(models.Model):
 
 class Store(models.Model):
     id = models.AutoField(primary_key=True)
-    product_id = models.ForeignKey("Products", on_delete=models.CASCADE, null=True, )
+    product_id = models.ForeignKey("Products", on_delete=models.CASCADE, null=True)
     quantity = models.DecimalField(max_digits=100, decimal_places=3, default=0)
     purchase_rate = models.DecimalField(max_digits=100, decimal_places=3, default=0)
 
@@ -40,10 +41,10 @@ class Store(models.Model):
 class Purchase(models.Model):
     id = models.AutoField(primary_key=True)
     customer_id = models.ForeignKey("Customer", on_delete=models.CASCADE, null=True)
-    details = models.JSONField(default=dict)
+    details = JSONField(default=dict)
     expenses = models.DecimalField(max_digits=100, decimal_places=3, default=0)
-    product_id = models.ForeignKeyManyToManyField(Products, related_name='product')
-    quantity = models.ForeignKeyManyToManyField(Store, related_name='quantity')
+    product_id = models.ManyToManyField(Products, related_name='product')
+    quantity = models.ManyToManyField(Store, related_name='store')
 
     class Meta:
         ordering = ['id']
