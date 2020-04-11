@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
 
+    'rest_framework',
+    'cms.apps.CmsConfig',
 ]
 
 MIDDLEWARE = [
@@ -83,11 +84,11 @@ WSGI_APPLICATION = 'djangobackend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'NAME': 'pitaka',
-         'USER': 'admin1',
-         'PASSWORD': 'newPassword',
+        'NAME': 'expensify',
+         'USER': 'exuser',
+         'PASSWORD': 'password',
          'HOST': '127.0.0.1',
          'PORT': '5432',
     }
