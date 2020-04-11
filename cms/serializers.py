@@ -18,25 +18,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 
 
-class CustomerSerializer(serializers.ModelSerializer):
+class MyUserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Customer
-        fields = ['id', 'code', 'name', 'email', 'details', 'ex_points']
-
-
-class ProductsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Products
-        fields = ['id', 'code', 'name', 'name', 'details', 'price', 'discount_rate', 'quantity']
-
-
-class StoreSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Store
-        fields = ['id', 'product_id', 'quantity', 'purchase_rate']
-
-
-class PurchaseSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Purchase
-        fields = ['id', 'customer_id', 'details', 'expenses', 'product_id', 'quantity']
+        model = models.User
+        fields = ['id',  'name', 'email', 'password']
