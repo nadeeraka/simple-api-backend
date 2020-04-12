@@ -1,11 +1,12 @@
 from datetime import datetime
 
 from django.db import models
-from django.contrib.postgres.fields import JSONField, ArrayField
 
 
 # Create your models here.
-class User(models.Model):
+
+
+class Client(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, unique=True)
     email = models.CharField(max_length=100, unique=True)
@@ -17,9 +18,9 @@ class User(models.Model):
 
 class Income(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    note = models.CharField(max_length=100, unique=True)
-    type = models.ForeignKey('IncomeType', on_delete=models.CASCADE , related_name="incomes")
+    user_id = models.ForeignKey(Client, on_delete=models.CASCADE)
+    note = models.CharField(max_length=100, blank=True)
+    type = models.ForeignKey('IncomeType', on_delete=models.CASCADE, related_name="incomes")
     amount = models.DecimalField(max_digits=100, decimal_places=4, default=0)
     timestamp = models.DateTimeField(default=datetime.now, blank=True)
 
@@ -29,9 +30,9 @@ class Income(models.Model):
 
 class Expense(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    note = models.CharField(max_length=100, unique=True)
-    type = models.ForeignKey("ExpenseType", on_delete=models.CASCADE,related_name="expenses")
+    user_id = models.ForeignKey(Client, on_delete=models.CASCADE)
+    note = models.CharField(max_length=100, blank=True)
+    type = models.ForeignKey("ExpenseType", on_delete=models.CASCADE, related_name="expenses")
     amount = models.DecimalField(max_digits=100, decimal_places=4, default=0)
     timestamp = models.DateTimeField(default=datetime.now, blank=True)
 
@@ -41,8 +42,8 @@ class Expense(models.Model):
 
 class Saving(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    note = models.CharField(max_length=100, unique=True)
+    user_id = models.ForeignKey(Client, on_delete=models.CASCADE)
+    note = models.CharField(max_length=100, blank=True)
     type = models.ForeignKey('SavingType', on_delete=models.CASCADE, related_name="savings")
     amount = models.DecimalField(max_digits=100, decimal_places=4, default=0)
     timestamp = models.DateTimeField(default=datetime.now, blank=True)
@@ -81,8 +82,8 @@ class SavingType(models.Model):
 
 class Balance(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    status = models.CharField(max_length=100, unique=True)
+    user_id = models.ForeignKey(Client, on_delete=models.CASCADE)
+    status = models.CharField(max_length=100, blank=True)
     amount = models.DecimalField(max_digits=100, decimal_places=4, default=0)
 
     class Meta:
