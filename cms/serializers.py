@@ -18,7 +18,49 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 
 
-class MyUserSerializer(serializers.ModelSerializer):
+class ClientSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.User
-        fields = ['id',  'name', 'email', 'password']
+        model = models.Client
+        fields = ['id', 'name', 'email', 'password']
+
+
+class IncomeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Income
+        fields = ['id', 'user_id', 'note', 'type', 'amount', 'timestamp']
+
+
+class ExpenseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Expense
+        fields = ['id', 'user_id', 'note', 'type', 'amount', 'timestamp']
+
+
+class SavingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Saving
+        fields = ['id', 'user_id', 'note', 'type', 'amount', 'timestamp', 'rate']
+
+
+class IncomeTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.IncomeType
+        fields = ['id', 'income', 'name']
+
+
+class SavingTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.SavingType
+        fields = ['id', 'saving', 'name']
+
+
+class ExpenseTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.ExpenseType
+        fields = ['id', 'expense', 'name']
+
+
+class BalanceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Balance
+        fields = ['id', 'user_id', 'status', 'amount']
