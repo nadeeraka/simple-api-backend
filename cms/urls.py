@@ -7,9 +7,12 @@ router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'clients', views.ClientViewSet)
 router.register(r'income', views.IncomeViewSet)
+router.register(r'incomeType', views.IncomeTypeViewSet)
 router.register(r'expense', views.ExpenseViewSet)
 router.register(r'saving', views.SavingViewSet)
+router.register(r'savingType', views.SavingTypeViewSet)
 router.register(r'balance', views.BalanceViewSet)
+router.register(r'expenseType', views.ExpenseTypeViewSet)
 
 
 # Wire up our API using automatic URL routing.
