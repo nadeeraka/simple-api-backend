@@ -86,7 +86,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'NAME': 'expensify',
+        'NAME': 'exp',
          'USER': 'exuser',
          'PASSWORD': 'password',
          'HOST': '127.0.0.1',

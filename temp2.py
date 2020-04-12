@@ -6,6 +6,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class Client(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, unique=True)
@@ -20,7 +21,6 @@ class Income(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(Client, on_delete=models.CASCADE)
     note = models.CharField(max_length=100, blank=True)
-    name = models.ForeignKey("IncomeType", default='', on_delete=models.CASCADE, related_name="incomes")
     amount = models.DecimalField(max_digits=100, decimal_places=4, default=0)
     timestamp = models.DateTimeField(default=datetime.now, blank=True)
 
@@ -32,7 +32,7 @@ class Expense(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(Client, on_delete=models.CASCADE)
     note = models.CharField(max_length=100, blank=True)
-    name = models.ForeignKey("ExpenseType", on_delete=models.CASCADE, related_name="expenses")
+    name = models.ForeignKey('ExpenseType', on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=100, decimal_places=4, default=0)
     timestamp = models.DateTimeField(default=datetime.now, blank=True)
 
@@ -65,38 +65,34 @@ class ExpenseType(models.Model):
 
     ]
     name = models.CharField(max_length=2, default='Salary', choices=EXPENSE_CHOICES)
-
     id = models.AutoField(primary_key=True)
+
+    class SavingType(models.Model):
+        SAVING_CHOICES = [
+            ('B', 'Bank'),
+            ('O', 'Other'),
+        ]
+        name = models.CharField(max_length=2, default='Bank', choices=SAVING_CHOICES)
+        id = models.AutoField(primary_key=True)
 
     class Meta:
         ordering = ['id']
 
-
-class SavingType(models.Model):
-    SAVING_CHOICES = [
-        ('B', 'Bank'),
-        ('O', 'Other'),
-    ]
-    name = models.CharField(max_length=2, default='Bank', choices=SAVING_CHOICES)
-    id = models.AutoField(primary_key=True)
-
-    class Meta:
-        ordering = ['id']
-
-
-class IncomeType(models.Model):
-    INCOME_CHOICES = {
-        ('S', 'Salary'),
-        ('P', 'Property'),
-        ('B', 'Business'),
-        ('O', 'Other')
-    }
-
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=2, default='Bank', choices=INCOME_CHOICES)
-
-    class Meta:
-        ordering = ['id']
+    # class IncomeType(models.Model):
+    #
+    #     INCOME_CHOICES = {
+    #         ('S', 'Salary'),
+    #         ('P', 'Property'),
+    #         ('B', 'Business'),
+    #         ('O', 'Other')
+    #     }
+    #
+    # id = models.AutoField(primary_key=True)
+    # name = models.CharField(max_length=2, default='Bank', choices=INCOME_CHOICES)
+    #
+    #
+    # class Meta:
+    #     ordering = ['id']
 
 
 class Balance(models.Model):

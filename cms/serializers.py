@@ -27,25 +27,25 @@ class ClientSerializer(serializers.ModelSerializer):
 class IncomeSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Income
-        fields = ['id', 'user_id', 'note', 'type', 'amount', 'timestamp']
+        fields = ['id', 'user_id', 'note', 'name', 'amount', 'timestamp']
 
 
 class ExpenseSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Expense
-        fields = ['id', 'user_id', 'note', 'type', 'amount', 'timestamp']
+        fields = ['id', 'user_id', 'note', 'name', 'amount', 'timestamp']
 
 
 class SavingSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Saving
-        fields = ['id', 'user_id', 'note', 'type', 'amount', 'timestamp', 'rate']
+        fields = ['id', 'user_id', 'note', 'name', 'amount', 'timestamp', 'rate']
 
 
 class IncomeTypeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.IncomeType
-        fields = ['id', 'income', 'name']
+        model = models.Income
+        fields = ['id',  'name']
 
 
 class SavingTypeSerializer(serializers.ModelSerializer):

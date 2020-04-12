@@ -1,10 +1,10 @@
 from datetime import datetime
-from typing import List, Tuple
 
 from django.db import models
 
 
 # Create your models here.
+
 
 class Client(models.Model):
     id = models.AutoField(primary_key=True)
@@ -17,10 +17,17 @@ class Client(models.Model):
 
 
 class Income(models.Model):
+    INCOME_CHOICES = [
+        ('S', 'Salary'),
+        ('P', 'Property'),
+        ('B', 'Business'),
+        ('O', 'Other')
+    ]
+
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(Client, on_delete=models.CASCADE)
     note = models.CharField(max_length=100, blank=True)
-    name = models.ForeignKey("IncomeType", default='', on_delete=models.CASCADE, related_name="incomes")
+    name = models.CharField(max_length=1, default='Salary', choices=INCOME_CHOICES)
     amount = models.DecimalField(max_digits=100, decimal_places=4, default=0)
     timestamp = models.DateTimeField(default=datetime.now, blank=True)
 
@@ -29,10 +36,24 @@ class Income(models.Model):
 
 
 class Expense(models.Model):
+    EXPENSE_CHOICES = [
+        ('L', 'Lifestyle'),
+        ('E', 'Entertainment'),
+        ('D', 'Donation'),
+        ('ED', 'Eduction'),
+        ('O', 'Other'),
+        ('F', 'Fixed'),
+        ('EQ', 'Equipment'),
+        ('M', 'Mortgage'),
+        ('F', 'Foods'),
+        ('H', 'Health'),
+
+    ]
+
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(Client, on_delete=models.CASCADE)
     note = models.CharField(max_length=100, blank=True)
-    name = models.ForeignKey("ExpenseType", on_delete=models.CASCADE, related_name="expenses")
+    name = models.CharField(max_length=2, default='Salary', choices=EXPENSE_CHOICES)
     amount = models.DecimalField(max_digits=100, decimal_places=4, default=0)
     timestamp = models.DateTimeField(default=datetime.now, blank=True)
 
@@ -41,19 +62,6 @@ class Expense(models.Model):
 
 
 class Saving(models.Model):
-    id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(Client, on_delete=models.CASCADE)
-    note = models.CharField(max_length=100, blank=True)
-    name = models.ForeignKey('SavingType', on_delete=models.CASCADE, related_name="savings")
-    amount = models.DecimalField(max_digits=100, decimal_places=4, default=0)
-    timestamp = models.DateTimeField(default=datetime.now, blank=True)
-    rate = models.DecimalField(max_digits=100, decimal_places=4, default=0)
-
-    class Meta:
-        ordering = ['id']
-
-
-class ExpenseType(models.Model):
     EXPENSE_CHOICES = [
         ('L', 'Lifestyle'),
         ('E', 'Entertainment'),
@@ -64,36 +72,14 @@ class ExpenseType(models.Model):
         ('EQ', 'Equipment'),
 
     ]
-    name = models.CharField(max_length=2, default='Salary', choices=EXPENSE_CHOICES)
 
     id = models.AutoField(primary_key=True)
-
-    class Meta:
-        ordering = ['id']
-
-
-class SavingType(models.Model):
-    SAVING_CHOICES = [
-        ('B', 'Bank'),
-        ('O', 'Other'),
-    ]
-    name = models.CharField(max_length=2, default='Bank', choices=SAVING_CHOICES)
-    id = models.AutoField(primary_key=True)
-
-    class Meta:
-        ordering = ['id']
-
-
-class IncomeType(models.Model):
-    INCOME_CHOICES = {
-        ('S', 'Salary'),
-        ('P', 'Property'),
-        ('B', 'Business'),
-        ('O', 'Other')
-    }
-
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=2, default='Bank', choices=INCOME_CHOICES)
+    user_id = models.ForeignKey(Client, on_delete=models.CASCADE)
+    note = models.CharField(max_length=100, blank=True)
+    type = models.ForeignKey('SavingType', on_delete=models.CASCADE, related_name="savings")
+    amount = models.DecimalField(max_digits=100, decimal_places=4, default=0)
+    timestamp = models.DateTimeField(default=datetime.now, blank=True)
+    rate = models.DecimalField(max_digits=100, decimal_places=4, default=0)
 
     class Meta:
         ordering = ['id']
