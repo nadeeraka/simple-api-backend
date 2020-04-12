@@ -7,7 +7,8 @@ from rest_framework import permissions
 from cms import serializers, models
 from rest_framework import filters, pagination
 
-#framework
+
+# framework
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -24,7 +25,9 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = serializers.GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
-#custom models
+
+
+# custom models
 
 class ClientViewSet(viewsets.ModelViewSet):
     queryset = models.Client.objects.all()
@@ -62,21 +65,21 @@ class BalanceViewSet(viewsets.ModelViewSet):
 
 
 class ExpenseTypeViewSet(viewsets.ModelViewSet):
-    queryset = models.Balance.ExpenseType.all()
+    queryset = models.ExpenseType.objects.all()
     serializer_class = serializers.ExpenseTypeSerializer
     permission_classes = [permissions.IsAuthenticated]
     pagination.PageNumberPagination.page_size_query_param = 'page_size'
 
 
 class IncomeTypeViewSet(viewsets.ModelViewSet):
-    queryset = models.Balance.IncomeType.all()
+    queryset = models.IncomeType.objects.all()
     serializer_class = serializers.IncomeTypeSerializer
     permission_classes = [permissions.IsAuthenticated]
     pagination.PageNumberPagination.page_size_query_param = 'page_size'
 
 
 class SavingTypeViewSet(viewsets.ModelViewSet):
-    queryset = models.Balance.SavingType.all()
+    queryset = models.SavingType.objects.all()
     serializer_class = serializers.SavingTypeSerializer
     permission_classes = [permissions.IsAuthenticated]
     pagination.PageNumberPagination.page_size_query_param = 'page_size'
