@@ -28,55 +28,55 @@ class GroupViewSet(viewsets.ModelViewSet):
 
 class ClientViewSet(viewsets.ModelViewSet):
     queryset = models.Client.objects.all()
-    serializer_class = serializers.SiteSerializer
+    serializer_class = serializers.ClientSerializer
     permission_classes = [permissions.IsAuthenticated]
     pagination.PageNumberPagination.page_size_query_param = 'page_size'
 
 
 class IncomeViewSet(viewsets.ModelViewSet):
     queryset = models.Income.objects.all()
-    serializer_class = serializers.SiteSerializer
+    serializer_class = serializers.IncomeSerializer
     permission_classes = [permissions.IsAuthenticated]
     pagination.PageNumberPagination.page_size_query_param = 'page_size'
 
 
 class SavingViewSet(viewsets.ModelViewSet):
     queryset = models.Saving.objects.all()
-    serializer_class = serializers.SiteSerializer
+    serializer_class = serializers.SavingSerializer
     permission_classes = [permissions.IsAuthenticated]
     pagination.PageNumberPagination.page_size_query_param = 'page_size'
 
 
 class ExpenseViewSet(viewsets.ModelViewSet):
     queryset = models.Expense.objects.all()
-    serializer_class = serializers.SiteSerializer
+    serializer_class = serializers.ExpenseSerializer
     permission_classes = [permissions.IsAuthenticated]
     pagination.PageNumberPagination.page_size_query_param = 'page_size'
 
 
 class BalanceViewSet(viewsets.ModelViewSet):
     queryset = models.Balance.objects.all()
-    serializer_class = serializers.SiteSerializer
+    serializer_class = serializers.BalanceSerializer
     permission_classes = [permissions.IsAuthenticated]
     pagination.PageNumberPagination.page_size_query_param = 'page_size'
 
 
 class ExpenseTypeViewSet(viewsets.ModelViewSet):
     queryset = models.Balance.ExpenseType.all()
-    serializer_class = serializers.SiteSerializer
+    serializer_class = serializers.ExpenseTypeSerializer
     permission_classes = [permissions.IsAuthenticated]
     pagination.PageNumberPagination.page_size_query_param = 'page_size'
 
 
 class IncomeTypeViewSet(viewsets.ModelViewSet):
     queryset = models.Balance.IncomeType.all()
-    serializer_class = serializers.SiteSerializer
+    serializer_class = serializers.IncomeTypeSerializer
     permission_classes = [permissions.IsAuthenticated]
     pagination.PageNumberPagination.page_size_query_param = 'page_size'
 
 
 class SavingTypeViewSet(viewsets.ModelViewSet):
     queryset = models.Balance.SavingType.all()
-    serializer_class = serializers.SiteSerializer
+    serializer_class = serializers.SavingTypeSerializer
     permission_classes = [permissions.IsAuthenticated]
     pagination.PageNumberPagination.page_size_query_param = 'page_size'
