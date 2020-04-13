@@ -18,6 +18,8 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name']
 
 
+# custome serializr
+
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Client
@@ -45,7 +47,7 @@ class SavingSerializer(serializers.ModelSerializer):
 class IncomeTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Income
-        fields = ['id',  'name']
+        fields = ['id', 'name']
 
 
 class SavingTypeSerializer(serializers.ModelSerializer):
@@ -63,4 +65,12 @@ class ExpenseTypeSerializer(serializers.ModelSerializer):
 class BalanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Balance
+        fields = ['id', 'user_id', 'status', 'amount']
+
+
+# auth
+
+class UserRegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Client
         fields = ['id', 'user_id', 'status', 'amount']

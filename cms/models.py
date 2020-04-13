@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import List, Tuple
-
+from django.contrib.auth.models import User, Group
 from django.db import models
 
 
@@ -8,6 +8,7 @@ from django.db import models
 
 class Client(models.Model):
     id = models.AutoField(primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='app_user')
     name = models.CharField(max_length=100, unique=True)
     email = models.CharField(max_length=100, unique=True)
     password = models.CharField(max_length=100, unique=True)
