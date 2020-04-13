@@ -73,4 +73,21 @@ class BalanceSerializer(serializers.ModelSerializer):
 class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Client
-        fields = ['id', 'user_id', 'status', 'amount']
+        fields = ['email', 'password', 'password2']
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
+
+    def save(self):
+        client = models.Client(
+            email=self.validated_data['email'],
+            username=self.validated_data['username']
+        )
+        password = self.validated_data['password']
+        password2 = self.validated_data['password2']
+
+        if password != password2:
+            return serializers.ValidationError({'password': 'Password match'})
+        models.Client.set_password(password)
+        client.save()
+        return client

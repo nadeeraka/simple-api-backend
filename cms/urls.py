@@ -13,6 +13,7 @@ router.register(r'saving', views.SavingViewSet)
 router.register(r'savingType', views.SavingTypeViewSet)
 router.register(r'balance', views.BalanceViewSet)
 router.register(r'expenseType', views.ExpenseTypeViewSet)
+router.register(r'account', views.reg_view, basename='reg')
 
 
 # Wire up our API using automatic URL routing.

@@ -6,6 +6,8 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from cms import serializers, models
 from rest_framework import filters, pagination
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 
 # framework
@@ -28,6 +30,19 @@ class GroupViewSet(viewsets.ModelViewSet):
 
 
 # custom models
+@api_view(['POST',])
+def reg_view(request):
+    serializer = serializers.UserRegisterSerializer(data=request.data)
+    data = {}
+    if serializer.is_valid():
+        client = serializer.save()
+        data['response'] = 'Success'
+        data['email'] = client.email
+        data['username'] = client.username
+    else:
+        data = serializer.error
+        return Response(data)
+
 
 class ClientViewSet(viewsets.ModelViewSet):
     queryset = models.Client.objects.all()
