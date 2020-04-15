@@ -53,13 +53,13 @@ class IncomeTypeSerializer(serializers.ModelSerializer):
 class SavingTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.SavingType
-        fields = ['id', 'saving', 'name']
+        fields = ['id',  'name']
 
 
 class ExpenseTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ExpenseType
-        fields = ['id', 'expense', 'name']
+        fields = ['id',  'name']
 
 
 class BalanceSerializer(serializers.ModelSerializer):
