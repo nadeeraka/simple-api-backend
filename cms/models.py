@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import List, Tuple
-
+from django.contrib.auth.models import User, Group
 from django.db import models
 
 
@@ -92,8 +92,8 @@ class IncomeType(models.Model):
         ('O', 'Other')
     }
 
+    name = models.CharField(max_length=2, default='Salary', choices=INCOME_CHOICES)
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=2, default='Bank', choices=INCOME_CHOICES)
 
     class Meta:
         ordering = ['id']
